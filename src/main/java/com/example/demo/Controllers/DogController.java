@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Models.Dog;
@@ -34,10 +35,10 @@ public class DogController {
         return response;
     }
 
-    @GetMapping("/dogs/{dogId}")
-	public Dog getdog(@PathVariable int dogId) {
+    @GetMapping(value = "/dogs/{dogId}")
+	public Dog getdog(@PathVariable String dogId) {
 		
-		Dog theDog = service.findById(dogId);
+		Dog theDog = service.findById(Integer.parseInt(dogId));
 		
 		if (theDog == null) {
 			throw new RuntimeException("dog id not found - " + dogId);
